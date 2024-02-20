@@ -1,0 +1,25 @@
+{
+  "name": "CineCorner",
+  "version": "1.0.0",
+  "description": "A simple movie app",
+  "author": "Sriram <sriramsubramanian23@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.4",
+    "postcss": "^8.4.35",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "buffer": "^5.5.0||^6.0.0",
+    "parcel": "^2.11.0",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
+  },
+  "scripts": {
+    "start": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html",
+    "deploy": "firebase deploy --only hosting:cine-corner"
+  }
+}

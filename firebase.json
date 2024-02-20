@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "cine-corner",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
