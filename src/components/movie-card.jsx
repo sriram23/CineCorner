@@ -2,7 +2,7 @@ import STAR from "../../assets/star.png";
 import CALENDAR from "../../assets/calendar.png";
 const MovieCard = ({ data }) => {
   return (
-    <div className="w-1/4 m-4 card-container rounded-lg border-white border-2 p-4 cursor-pointer shadow-md flex justify-between flex-col">
+    <div className="w-full md:w-1/3 xl:w-1/4 m-4 card-container rounded-lg border-white border-2 p-4 cursor-pointer shadow-md flex justify-between flex-col">
       <div>
         <h2 className="text-2xl text-center mb-4 mt-4">
           {data.title}{" "}
