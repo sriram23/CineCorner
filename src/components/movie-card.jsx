@@ -1,5 +1,6 @@
 import STAR from "../../assets/star.png";
 import CALENDAR from "../../assets/calendar.png";
+import PLACEHOLDER from "../../assets/Cine Corner Placeholder.png"
 const MovieCard = ({ data }) => {
   return (
     <div className="w-full md:w-1/3 xl:w-1/4 m-4 card-container rounded-lg border-white border-2 p-4 cursor-pointer shadow-md flex justify-between flex-col">
@@ -10,10 +11,13 @@ const MovieCard = ({ data }) => {
             "(" + data.original_title + ")"}
         </h2>
         <div>
-          <img
+          {data.backdrop_path ? <img
             className="mb-4 w-full"
             src={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`}
-          />
+          />: <img
+          className="mb-4 w-full"
+          src={PLACEHOLDER}
+        />}
           <p>{data.overview}</p>
         </div>
       </div>

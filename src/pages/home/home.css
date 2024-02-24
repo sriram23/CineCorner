@@ -1,6 +1,7 @@
 .home-container {
     background: rgba(25,25,25,1);
     color: white;
+    min-height: 100vh;
 }
 .card-container {
     background: linear-gradient(138deg, rgba(25,25,25,1) 30%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,1) 70%);
