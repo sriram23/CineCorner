@@ -39,9 +39,9 @@ const Home = () => {
     }
     return (
         <div className="home-container">
-            <div className="flex p-2 justify-between items-center">
+            <div className="flex flex-col md:flex-row p-2 justify-between items-center">
                 <h1 className="text-4xl mb-4 pt-4 font-bold">Cine Corner</h1>
-                <input onChange={_.debounce(handleSearch, 1000)} className="text=xl h-10 p-2 text-black rounded-md m-2 w-1/5" type="search" placeholder="Search for movies" />
+                <input onChange={_.debounce(handleSearch, 1000)} className="text=xl h-10 p-2 text-black rounded-md m-2 w-full md:w-1/5" type="search" placeholder="Search for movies" />
             </div>
             <h2 className="text-3xl text-center mb-4 pt-4">Popular Movies</h2>
             <div className="flex flex-wrap justify-center">
