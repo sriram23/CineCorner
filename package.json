@@ -5,12 +5,15 @@
   "author": "Sriram <sriramsubramanian23@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.7",
     "dotenv": "^16.4.4",
     "lodash": "^4.17.21",
     "postcss": "^8.4.35",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
     "buffer": "^5.5.0||^6.0.0",
