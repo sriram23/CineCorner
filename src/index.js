@@ -5,6 +5,7 @@ import { store } from "./store";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Movie from "./pages/movie/movie";
+import Footer from "./components/footer";
 
 const App = () => {
   return (
@@ -21,6 +22,11 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
-  </Provider>
+    <main>
+        <App />
+    </main>
+    <footer>
+        <Footer/>
+    </footer>
+</Provider>
 );

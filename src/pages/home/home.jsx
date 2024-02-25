@@ -8,11 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMovies, setGenres } from "../../slice/movieSlice";
 // Router
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/footer";
 
 const Home = () => {
   const navigate = useNavigate();
   const movies = useSelector((state) => state.movie.movies);
-  const genres = useSelector((state) => state.movie.genres);
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
   const URL =
