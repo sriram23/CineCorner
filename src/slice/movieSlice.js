@@ -8,6 +8,7 @@ const initialState = {
         cast: [],
         crew: []
     },
+    trailer: {}
 }
 
 export const movieSlice = createSlice({
@@ -25,9 +26,12 @@ export const movieSlice = createSlice({
     },
     setCredits: (state, action) => {
         state.credits = action.payload
+    },
+    setTrailer: (state, action) => {
+        state.trailer = action.payload
     }
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits } = movieSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer } = movieSlice.actions
 export default movieSlice.reducer

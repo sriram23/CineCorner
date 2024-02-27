@@ -1,7 +1,7 @@
 import STAR from '../../assets/star.png'
 import CALENDAR from "../../assets/calendar.png";
 import { useSelector } from "react-redux";
-const MovieDetailsCard = ({ movie }) => {
+const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
 const genres = useSelector((state) => state.movie.genres);
 const getGenres = (id) => {
     const genre = genres.find((genre) => genre.id == id);
@@ -38,7 +38,7 @@ const getGenres = (id) => {
           </div>
           <div className='flex items-center bg-black p-4 w-fit rounded-lg'>
             <p className='text-xl'>Watch Movie Trailer</p>
-            <button className='bg-gray-300 text-black p-2 rounded-md shadow-xl m-2 ml-4'>Watch Now</button>
+            <button className='bg-gray-300 text-black p-2 rounded-md shadow-xl m-2 ml-4' onClick={onWatchTrailer}>Watch Now</button>
           </div>
           <div>
             <p className='text-2xl mr-2 mt-2 mb-2'>{movie.original_language}</p>
