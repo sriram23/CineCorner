@@ -5,14 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import MovieDetailsCard from "../../components/movie-details-card";
 import { setCurrentId, setCredits, setTrailer } from "../../slice/movieSlice";
 import Credit from "../../components/credit-card";
-import Footer from "../../components/footer";
 import TrailerModal from "../../components/trailer-modal";
 const Movie = () => {
-  const movies = useSelector((state) => state.movie.movies);
   const credits = useSelector((state) => state.movie.credits);
   const trailer = useSelector((state) => state.movie.trailer);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const MOVIE_BY_ID = `https://api.themoviedb.org/3/movie/${id}?language=en-US`
   const VIDEO_URL = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
   const CREDITS_URL = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
   const [currentMovie, setCurrentMovie] = useState();
@@ -37,9 +36,18 @@ const Movie = () => {
     console.log("Credits: ", res);
     dispatch(setCredits(res.data));
   };
+  const getMovieById = async () => {
+    const res = await axios.get(MOVIE_BY_ID,{
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${process.env.API_READ_ACCESS_TOKEN}`,
+          },
+        }
+    )
+    setCurrentMovie(res.data)
+  }
   useEffect(() => {
-    const movie = movies.find((movie) => movie.id == id);
-    setCurrentMovie(movie);
+    getMovieById()
     getCurrentMovieVideo();
     getMovieCredits();
     dispatch(setCurrentId(id));
