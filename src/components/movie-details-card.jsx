@@ -30,11 +30,11 @@ const getGenres = (id) => {
         </div>
         <div className="w-full md:w-1/3 m-4 z-50 flex flex-col items-center md:items-start">
           <h2 className="text-2xl md:text-4xl m-2 font-bold">
-            {movie.title} ({movie.original_title})
+            {movie.title} {movie.title !== movie.original_title && `(${movie.original_title})`}
           </h2>
           <div className="flex items-center mt-2 mb-2">
             <img className='w-8' src={STAR} alt="Star Rating" />
-            <p className='m-2 text-2xl'>{movie.vote_average.toFixed(1)}/10</p>
+            <p className='m-2 text-2xl'>{movie.vote_average && movie.vote_average.toFixed(1)}/10</p>
           </div>
           <div className='flex items-center bg-black p-4 w-fit rounded-lg'>
             <p className='text-xl'>Watch Movie Trailer</p>
@@ -44,7 +44,7 @@ const getGenres = (id) => {
             <p className='text-2xl mr-2 mt-2 mb-2'>{movie.original_language}</p>
           </div>
           <div className='flex'>
-            {movie.genre_ids.map((genre) => (
+            {movie.genre_ids && movie.genre_ids.map((genre) => (
               <p className='mr-2 mt-2 mb-2 bg-gray-200 text-black p-2 rounded-md' key={genre}>{getGenres(genre)}</p>
             ))}
           </div>
