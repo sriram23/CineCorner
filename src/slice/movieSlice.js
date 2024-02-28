@@ -8,7 +8,10 @@ const initialState = {
         cast: [],
         crew: []
     },
-    trailer: {}
+    trailer: {},
+    currentPage: 1,
+    totalPages: 0,
+    currentReviews: []
 }
 
 export const movieSlice = createSlice({
@@ -24,14 +27,24 @@ export const movieSlice = createSlice({
     setCurrentId: (state, action) => {
         state.id = action.payload
     },
+
+    setCurrentPage: (state, action) => {
+        state.currentPage = action.payload
+    },
+    setTotalPages: (state, action) => {
+        state.totalPages = action.payload
+    },
     setCredits: (state, action) => {
         state.credits = action.payload
     },
     setTrailer: (state, action) => {
         state.trailer = action.payload
+    },
+    setCurrentReviews: (state, action) => {
+        state.currentReviews = action.payload
     }
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer } = movieSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews } = movieSlice.actions
 export default movieSlice.reducer

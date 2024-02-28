@@ -1,22 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MovieCard from "../../components/movie-card";
+import PageComponent from "../../components/page-component";
 import "./home.css";
 import _ from "lodash";
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres } from "../../slice/movieSlice";
+import { setMovies, setGenres, setCurrentPage, setTotalPages } from "../../slice/movieSlice";
 // Router
 import { useNavigate } from "react-router-dom";
-import Footer from "../../components/footer";
 
 const Home = () => {
   const navigate = useNavigate();
   const movies = useSelector((state) => state.movie.movies);
+  const currentPage = useSelector((state) => state.movie.currentPage);
+  const totalPages = useSelector((state) => state.movie.totalPages);
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
+  const [isLoading, setIsloading] = useState(false);
   const URL =
-    "https://api.themoviedb.org/3/movie/popular?langualge=en-US&page=1";
+    `https://api.themoviedb.org/3/movie/popular?langualge=en-US&page=${currentPage}`;
   const GENRE_URL = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${process.env.API_KEY}`;
   // const [data, setData] = useState([])
@@ -25,9 +28,15 @@ const Home = () => {
     fetchGenre();
   }, []);
   useEffect(() => {
+    fetchMovie();
+    fetchGenre();
+  }, [currentPage]);
+  useEffect(() => {
     searchMovie();
+    dispatch(setCurrentPage(1))
   }, [query]);
   const fetchMovie = async () => {
+    setIsloading(true);
     const res = await axios.get(URL, {
       headers: {
         accept: "application/json",
@@ -38,7 +47,11 @@ const Home = () => {
     // setData(res.data)
     if (res.data && res.data.results) {
       dispatch(setMovies(res.data.results));
+      dispatch(setTotalPages(res.data.total_pages))
     }
+    setTimeout(() => {
+      setIsloading(false);
+    }, 2000)
   };
 
   const fetchGenre = async () => {
@@ -55,15 +68,18 @@ const Home = () => {
   };
 
   const searchMovie = async () => {
+    setIsloading(true);
     if (query && query.length) {
       const res = await axios.get(SEARCH_URL);
       console.log("Res: ", res);
       if (res.data && res.data.results) {
         dispatch(setMovies(res.data.results));
+        dispatch(setTotalPages(res.data.total_pages))
       }
     } else {
       fetchMovie();
     }
+    setIsloading(false);
   };
 
   const handleSearch = (e) => {
@@ -94,8 +110,12 @@ const Home = () => {
               onCardClick={handleCardClick}
               key={movie.id}
               data={movie}
+              loading={isLoading}
             />
           ))}
+      </div>
+      <div>
+        <PageComponent totalPages={totalPages} currenPage={currentPage} onPrevClick={() => dispatch(setCurrentPage(currentPage > 0 && currentPage - 1))} onNextClick={() => dispatch(setCurrentPage(currentPage < totalPages && currentPage + 1))} />
       </div>
     </div>
   );

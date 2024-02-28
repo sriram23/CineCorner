@@ -3,17 +3,20 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import MovieDetailsCard from "../../components/movie-details-card";
-import { setCurrentId, setCredits, setTrailer } from "../../slice/movieSlice";
+import { setCurrentId, setCredits, setTrailer, setCurrentReviews } from "../../slice/movieSlice";
 import Credit from "../../components/credit-card";
 import TrailerModal from "../../components/trailer-modal";
+import ReviewCard from "../../components/review-card";
 const Movie = () => {
   const credits = useSelector((state) => state.movie.credits);
   const trailer = useSelector((state) => state.movie.trailer);
+  const reviews = useSelector((state) => state.movie.currentReviews);
   const { id } = useParams();
   const dispatch = useDispatch();
   const MOVIE_BY_ID = `https://api.themoviedb.org/3/movie/${id}?language=en-US`
   const VIDEO_URL = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
   const CREDITS_URL = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
+  const REVIEW_URL = `https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US&page=1`;
   const [currentMovie, setCurrentMovie] = useState();
   const [showTrailer, setShowTrailer] = useState(false);
   const getCurrentMovieVideo = async () => {
@@ -46,11 +49,23 @@ const Movie = () => {
     )
     setCurrentMovie(res.data)
   }
+  const getMovieReviews = async () => {
+    const res = await axios.get(REVIEW_URL,{
+      headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${process.env.API_READ_ACCESS_TOKEN}`,
+        },
+      }
+    )
+    console.log("Reviews: ", res.data)
+    dispatch(setCurrentReviews(res.data && res.data.results))
+  };
   useEffect(() => {
     getMovieById()
     getCurrentMovieVideo();
     getMovieCredits();
     dispatch(setCurrentId(id));
+    getMovieReviews();
   }, [id]);
 
   const scroll = (id, direction) => {
@@ -126,6 +141,11 @@ const Movie = () => {
             </button>
           )}
         </div>
+      </div>
+      <div>
+        {reviews && reviews.map(review => (
+          <ReviewCard review={review}/>
+        ))}
       </div>
       {showTrailer && trailer.results && trailer.results.length && (
         <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex w-full h-full items-center justify-center bg-black bg-opacity-70">
