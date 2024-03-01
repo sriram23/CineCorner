@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Movie from "./pages/movie/movie";
 import Footer from "./components/footer";
+import Person from "./pages/person/person";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/movie/:id" element={<Movie />}></Route>
+          <Route path="/person/:id" element={<Person/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

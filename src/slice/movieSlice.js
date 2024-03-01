@@ -11,7 +11,8 @@ const initialState = {
     trailer: {},
     currentPage: 1,
     totalPages: 0,
-    currentReviews: []
+    currentReviews: [],
+    personDetails: {},
 }
 
 export const movieSlice = createSlice({
@@ -42,9 +43,12 @@ export const movieSlice = createSlice({
     },
     setCurrentReviews: (state, action) => {
         state.currentReviews = action.payload
+    },
+    setPersonDetails: (state, action) => {
+        state.personDetails = action.payload
     }
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews } = movieSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails } = movieSlice.actions
 export default movieSlice.reducer
