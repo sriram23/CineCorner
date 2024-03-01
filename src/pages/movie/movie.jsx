@@ -142,7 +142,8 @@ const Movie = () => {
           )}
         </div>
       </div>
-      <div>
+      <div className="max-w-5xl m-2 mt-20">
+        <h3 className="text-3xl mb-2">Reviews</h3>
         {reviews && reviews.map(review => (
           <ReviewCard review={review}/>
         ))}
