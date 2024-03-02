@@ -70,7 +70,7 @@ const Movie = () => {
     scrollElement.scrollLeft += direction === "left" ? -750 : 750;
   };
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center bg-light text-dark dark:bg-dark dark:text-light">
       <div className="w-full">
         <MovieDetailsCard
           movie={currentMovie}

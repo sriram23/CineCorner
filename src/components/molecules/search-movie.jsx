@@ -3,7 +3,7 @@ import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages, setQuery } from "../../slice/searchSlice";
+import { setMovies, setTotalPages, setQuery } from "../../slice/searchSlice";
 import { useNavigate } from "react-router-dom";
 
 const SearchMovie = () => {
@@ -39,7 +39,7 @@ const SearchMovie = () => {
         // TODO: Fix the value
         //   value={query}
           onChange={_.debounce(handleSearch, 1000)}
-          className="text=xl h-10 p-2 text-black rounded-md m-2 w-4/5 sm:w-1/2 md:w-1/5"
+          className="text=xl h-10 p-2 text-dark rounded-md m-2 w-4/5 sm:w-1/2 md:w-1/5"
           type="search"
           placeholder="Search for movies"
         />

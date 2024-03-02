@@ -10,7 +10,7 @@ const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-        className="flex flex-col md:flex-row justify-center items-center relative text-white pt-20 pb-20"
+        className="flex flex-col md:flex-row justify-center items-center relative text-light pt-20 pb-20"
       >
         <div
           id="overlay"
