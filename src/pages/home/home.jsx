@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setTheme } from '../../slice/mainSlice'
 import SUN from '../../../assets/sun.png'
 import MOON from '../../../assets/moon.png'
+import NowPlaying from "../../components/molecules/now-playing";
+import TopRated from "../../components/molecules/top-rated";
+import Upcoming from "../../components/molecules/upcoming";
 const Home = () => {
   const theme = useSelector((state) => state.main.theme)
   const currentTab = useSelector((state) => state.main.currentTab)
@@ -34,9 +37,9 @@ const Home = () => {
         tabs={["Popular", "Now Playing", "Top Rated", "Upcoming", "Search"]}
         contents={[
           <PopularMovies />,
-          <h1>Now Playing</h1>,
-          <h1>Top Rated</h1>,
-          <h1>Upcoming</h1>,
+          <NowPlaying/>,
+          <TopRated/>,
+          <Upcoming/>,
           <SearchMovie />,
         ]}
       />

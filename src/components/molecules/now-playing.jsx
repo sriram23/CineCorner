@@ -5,19 +5,19 @@ import PageComponent from "../../components/page-component";
 
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages } from "../../slice/movieSlice";
+import { setMovies, setGenres, setCurrentPage, setTotalPages } from "../../slice/nowPlayingSlice";
 // Router
 import { useNavigate } from "react-router-dom";
 
-const PopularMovies = () => {
+const NowPlaying = () => {
   const navigate = useNavigate();
-  const movies = useSelector((state) => state.movie.movies);
-  const currentPage = useSelector((state) => state.movie.currentPage);
-  const totalPages = useSelector((state) => state.movie.totalPages);
+  const movies = useSelector((state) => state.nowPlaying.movies);
+  const currentPage = useSelector((state) => state.nowPlaying.currentPage);
+  const totalPages = useSelector((state) => state.nowPlaying.totalPages);
   const dispatch = useDispatch();
   const [isLoading, setIsloading] = useState(false);
   const URL =
-    `https://api.themoviedb.org/3/movie/popular?langualge=en-US&page=${currentPage}`;
+    `https://api.themoviedb.org/3/movie/now_playing?langualge=en-US&page=${currentPage}`;
   const GENRE_URL = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   useEffect(() => {
     fetchMovie();
@@ -62,7 +62,7 @@ const PopularMovies = () => {
   };
   return (
     <div className="popular-container">
-      <h2 className="text-3xl text-center mb-4 pt-4">Popular Movies</h2>
+      <h2 className="text-3xl text-center mb-4 pt-4">Now Playing</h2>
       <div className="flex flex-wrap justify-center">
         {movies &&
           movies.map((movie) => (
@@ -80,4 +80,4 @@ const PopularMovies = () => {
     </div>
   );
 };
-export default PopularMovies;
+export default NowPlaying;
