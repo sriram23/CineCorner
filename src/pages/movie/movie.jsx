@@ -26,7 +26,6 @@ const Movie = () => {
         Authorization: `Bearer ${process.env.API_READ_ACCESS_TOKEN}`,
       },
     });
-    console.log("Video: ", res);
     dispatch(setTrailer(res.data));
   };
   const getMovieCredits = async () => {
@@ -36,7 +35,6 @@ const Movie = () => {
         Authorization: `Bearer ${process.env.API_READ_ACCESS_TOKEN}`,
       },
     });
-    console.log("Credits: ", res);
     dispatch(setCredits(res.data));
   };
   const getMovieById = async () => {
@@ -57,7 +55,6 @@ const Movie = () => {
         },
       }
     )
-    console.log("Reviews: ", res.data)
     dispatch(setCurrentReviews(res.data && res.data.results))
   };
   useEffect(() => {

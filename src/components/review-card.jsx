@@ -5,7 +5,6 @@ const ReviewCard = ({review}) => {
         getReviewColor(review.author_details.rating)
     }, [review.author_details.rating])
     const [bg, setBg] = useState('bg-green-500')
-    console.log(review)
     const getReviewColor = (rating) => {
         if(review && review.author_details && review.author_details.rating) {
             if(review.author_details.rating > 7) {
