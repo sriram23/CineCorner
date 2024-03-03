@@ -5,7 +5,7 @@ import PageComponent from "../../components/page-component";
 
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages } from "../../slice/upcomingSlice";
+import { setMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/upcomingSlice";
 // Router
 import { useNavigate } from "react-router-dom";
 
@@ -20,13 +20,42 @@ const Upcoming = () => {
     `https://api.themoviedb.org/3/movie/upcoming?langualge=en-US&page=${currentPage}`;
   const GENRE_URL = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   useEffect(() => {
-    fetchMovie();
-    fetchGenre();
+    if(currentPage === 1) fetchMovie();
   }, []);
   useEffect(() => {
-    fetchMovie();
-    fetchGenre();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [totalPages]);
+  useEffect(() => {
+    if(currentPage <= totalPages) {
+      appendMovies();
+    }
   }, [currentPage]);
+
+  let scrollDebounce;
+  const handleScroll = (e) => {
+    clearTimeout(scrollDebounce);
+    const totalHeight = document.body.offsetHeight;
+    const scrollPosition = Math.ceil(window.scrollY + window.innerHeight);
+    scrollDebounce = setTimeout(() => {
+      if(scrollPosition >= totalHeight - 1) {
+        dispatch(incrementCurrentPage(1));
+      }
+    },500)
+  }
+  const appendMovies = async () => {
+    console.log('Appending movies')
+    const res = await axios.get(URL, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.API_READ_ACCESS_TOKEN}`,
+      },
+    });
+    if (res.data && res.data.results) {
+      dispatch(setMovies([...movies, ...res.data.results]));
+    }
+  }
+
 
   const fetchMovie = async () => {
     setIsloading(true);
@@ -73,9 +102,6 @@ const Upcoming = () => {
               loading={isLoading}
             />
           ))}
-      </div>
-      <div>
-        <PageComponent totalPages={totalPages} currenPage={currentPage} onPrevClick={() => dispatch(setCurrentPage(currentPage > 0 && currentPage - 1))} onNextClick={() => dispatch(setCurrentPage(currentPage < totalPages && currentPage + 1))} />
       </div>
     </div>
   );

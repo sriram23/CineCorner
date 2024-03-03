@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import WHITE_STAR from '../../assets/white-star.png'
 const ReviewCard = ({review}) => {
+    const [showMore, setShowMore] = useState(false)
     useEffect(() => {
         getReviewColor(review.author_details.rating)
     }, [review.author_details.rating])
@@ -26,7 +27,8 @@ const ReviewCard = ({review}) => {
                     <p className='text-sm'>{review && review.author_details && review.author_details.rating}</p>
                 </div>
             </div>
-            <p>{review && review.content}</p>
+            <p>{review && showMore ? review.content : review.content.length > 500 ? review.content.slice(0,500)+"...":review.content}</p>
+            {review.content && review.content.length > 500 && <button className='text-blue-500' onClick={() => setShowMore(!showMore)}>{showMore ? 'Show Less' : 'Show More'}</button>}
         </div>
     )
 }

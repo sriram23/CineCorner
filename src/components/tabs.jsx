@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Tabs = ({tabs, contents}) => {
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState(Number(sessionStorage.getItem('currentTab')) || 0)
+    useEffect(() => {
+        sessionStorage.setItem('currentTab', active)
+    }, [active])
     return (
         <div>
             <div className="flex m-2 whitespace-nowrap overflow-x-auto">

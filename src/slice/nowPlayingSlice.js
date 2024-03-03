@@ -32,6 +32,9 @@ export const nowPlayingSlice = createSlice({
     setCurrentPage: (state, action) => {
         state.currentPage = action.payload
     },
+    incrementCurrentPage: (state, action) => {
+        state.currentPage += action.payload  
+    },
     setTotalPages: (state, action) => {
         state.totalPages = action.payload
     },
@@ -50,5 +53,5 @@ export const nowPlayingSlice = createSlice({
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails } = nowPlayingSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = nowPlayingSlice.actions
 export default nowPlayingSlice.reducer

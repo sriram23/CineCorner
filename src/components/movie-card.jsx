@@ -4,11 +4,11 @@ import PLACEHOLDER from "../../assets/Cine Corner Placeholder.png"
 const MovieCard = ({ data, onCardClick, loading }) => {
   if(loading) return (
     <div className="animate-pulse w-full md:w-1/3 xl:w-1/4 m-4 card-container rounded-lg border-white border-2 p-4 cursor-pointer shadow-md flex justify-between flex-col">
-      <div class="h-2 m-2 bg-slate-200 rounded"></div>
-      <div class="h-48 m-2 bg-slate-200 rounded"></div>
-      <div class="h-2 m-2 bg-slate-200 rounded"></div>
-      <div class="h-2 m-2 bg-slate-200 rounded"></div>
-      <div class="h-2 m-2 bg-slate-200 rounded"></div>
+      <div className="h-2 m-2 bg-slate-200 rounded"></div>
+      <div className="h-48 m-2 bg-slate-200 rounded"></div>
+      <div className="h-2 m-2 bg-slate-200 rounded"></div>
+      <div className="h-2 m-2 bg-slate-200 rounded"></div>
+      <div className="h-2 m-2 bg-slate-200 rounded"></div>
     </div>
   )
   return (

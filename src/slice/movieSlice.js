@@ -10,7 +10,7 @@ const initialState = {
     },
     trailer: {},
     currentPage: 1,
-    totalPages: 0,
+    totalPages: 1,
     currentReviews: [],
     personDetails: {},
 }
@@ -32,6 +32,9 @@ export const movieSlice = createSlice({
     setCurrentPage: (state, action) => {
         state.currentPage = action.payload
     },
+    incrementCurrentPage: (state, action) => {
+        state.currentPage += action.payload  
+    },
     setTotalPages: (state, action) => {
         state.totalPages = action.payload
     },
@@ -50,5 +53,5 @@ export const movieSlice = createSlice({
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails } = movieSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = movieSlice.actions
 export default movieSlice.reducer
