@@ -1,7 +1,25 @@
 import STAR from "../../assets/star.png";
 import CALENDAR from "../../assets/calendar.png";
 import LANG from "../helpers/languages.json";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from '../slice/mainSlice'
+
+import ARROW_LEFT_WHITE from "../../assets/ArrowLeftWhite.png"
+import SUN from "../../assets/sun.png"
+import MOON from "../../assets/moon.png"
+// import { switchTheme } from "../helpers/commonfunctions";
 const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
+  // TODO: Make the theme switch a common function, DRY...
+  const theme = useSelector((state) => state.main.theme)
+  const dispatch = useDispatch()
+  const switchTheme = () => {
+    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))
+    if (theme === 'light') {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }
   if (movie) {
     return (
       <div
@@ -12,6 +30,16 @@ const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
         }}
         className="flex flex-col md:flex-row justify-center items-center relative text-light pt-20 pb-20"
       >
+        {/* Nav and theme buttons */}
+        <div className="absolute top-0 left-0 m-4 z-50">
+          <button className="cursor-pointer"><img src={ARROW_LEFT_WHITE} alt="Back Button" onClick={() => window.history.back()}/></button>
+        </div>
+        <div className="absolute top-0 right-0 m-4 z-50">
+        <button className="bg-dark text-light dark:bg-light dark:text-dark p-2 rounded-md" onClick={() => switchTheme(theme)}>
+          <img src={theme === 'light'? MOON : SUN} alt="Theme icon" />
+        </button>
+        </div>
+        {/* Actual Card */}
         <div
           id="overlay"
           className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900 opacity-60 duration-700"

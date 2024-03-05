@@ -10,6 +10,7 @@ import MOON from '../../../assets/moon.png'
 import NowPlaying from "../../components/molecules/now-playing";
 import TopRated from "../../components/molecules/top-rated";
 import Upcoming from "../../components/molecules/upcoming";
+
 const Home = () => {
   const theme = useSelector((state) => state.main.theme)
   const currentTab = useSelector((state) => state.main.currentTab)
@@ -29,7 +30,7 @@ const Home = () => {
           <img src={LOGO} alt="Cine Corner Logo" className="w-16 m-2" />
           <h1 className="text-4xl mb-4 pt-4 font-bold">Cine Corner</h1>
         </div>
-        <button className="bg-dark text-light dark:bg-light dark:text-dark p-2 rounded-md" onClick={switchTheme}>
+        <button className="bg-dark text-light dark:bg-light dark:text-dark p-2 rounded-md" onClick={() => switchTheme(theme)}>
           <img src={theme === 'light'? MOON : SUN} alt="Theme icon" />
         </button>
       </div>

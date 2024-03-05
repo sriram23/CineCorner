@@ -49,9 +49,15 @@ export const movieSlice = createSlice({
     },
     setPersonDetails: (state, action) => {
         state.personDetails = action.payload
+    },
+    setPersonCredits: (state, action) => {
+        state.personDetails.credits = action.payload
+    },
+    setPersonImages: (state, action) => {
+        state.personDetails.images = action.payload
     }
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = movieSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage, setPersonCredits, setPersonImages } = movieSlice.actions
 export default movieSlice.reducer
