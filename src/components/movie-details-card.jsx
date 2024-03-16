@@ -65,11 +65,11 @@ useEffect(() => {
           />
         </div>
         <div className="w-full md:w-1/3 m-4 z-50 flex flex-col items-center md:items-start">
-          <h2 className="text-2xl md:text-4xl m-2 font-bold">
+          <h1 className="text-2xl md:text-4xl m-2 font-bold">
             {movie.original_title}{" "}
             {movie.title !== movie.original_title &&
               `(${movie.title})`}
-          </h2>
+          </h1>
           <h3 className="text-2xl md:text-lg m-2 text-slate-200">{movie.tagline}</h3>
           <div className="flex">
             {movie.genres &&
@@ -102,19 +102,19 @@ useEffect(() => {
             </button>
           </div>
           <div className="flex items-center">
-            <p className="text-2xl mr-2 mt-2 mb-2">
+            <h2 className="text-2xl mr-2 mt-2 mb-2">
               {LANG[movie.original_language]}
-            </p>
+            </h2>
             <li className="text-white"></li>
             {movie.runtime && (
-              <p className="text-2xl mr-2 mt-2 mb-2">
+              <h2 className="text-2xl mr-2 mt-2 mb-2">
                 {convertMinutesToSeconds(movie.runtime)}
-              </p>
+              </h2>
             )}
             <li className="text-white"></li>
-            <p className="text-2xl mr-2 mt-2 mb-2">
+            <h2 className="text-2xl mr-2 mt-2 mb-2">
               {movie.status}
-            </p>
+            </h2>
           </div>
           <div className="flex items-center mt-2 mb-2">
             <img className="w-10" src={CALENDAR} alt="Released Date" />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const Tabs = ({tabs, contents}) => {
-    const [active, setActive] = useState(Number(sessionStorage.getItem('currentTab')) || 0)
+    const [active, setActive] = useState(Number(sessionStorage.getItem('currentTab')) || 1)
     useEffect(() => {
         sessionStorage.setItem('currentTab', active)
     }, [active])

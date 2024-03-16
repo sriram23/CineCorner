@@ -24,13 +24,13 @@ const Home = () => {
         </button> */}
       </div>
       <Tabs
-        tabs={["Popular", "Now Playing", "Top Rated", "Upcoming", "Search"]}
+        tabs={["Search", "Popular", "Now Playing", "Top Rated", "Upcoming" ]}
         contents={[
+          <SearchMovie />,
           <PopularMovies />,
           <NowPlaying/>,
           <TopRated/>,
           <Upcoming/>,
-          <SearchMovie />,
         ]}
       />
     </div>

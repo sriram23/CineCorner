@@ -33,6 +33,7 @@ const MovieCard = ({ data, onCardClick, loading }) => {
           {data.poster_path ? <img
             className="w-full rounded-lg"
             src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+            alt={"Movie poster "+data.title}
           />: <img
           className="w-full rounded-md"
           src={PLACEHOLDER}
