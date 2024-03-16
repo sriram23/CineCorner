@@ -1,44 +1,57 @@
-import STAR from "../../assets/star.png";
+import STAR from "../../assets/white-star.png";
 import CALENDAR from "../../assets/calendar.png";
 import LANG from "../helpers/languages.json";
-import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from '../slice/mainSlice'
+import moment from "moment";
 
 import ARROW_LEFT_WHITE from "../../assets/ArrowLeftWhite.png"
-import SUN from "../../assets/sun.png"
-import MOON from "../../assets/moon.png"
-// import { switchTheme } from "../helpers/commonfunctions";
+import { useState, useEffect } from "react";
+// import SUN from "../../assets/sun.png"
+// import MOON from "../../assets/moon.png"
 const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
-  // TODO: Make the theme switch a common function, DRY...
-  const theme = useSelector((state) => state.main.theme)
-  const dispatch = useDispatch()
-  const switchTheme = () => {
-    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))
-    if (theme === 'light') {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+  const [bg, setBg] = useState('bg-green-500')
+  const convertMinutesToSeconds = (minutes) => {
+    let hours = Math.floor(minutes / 60);
+    let remainingMinutes = minutes % 60;
+
+    // Ensure leading zeros if necessary
+    hours = hours < 10 ? '0' + hours : hours;
+    remainingMinutes = remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes;
+
+    return hours + 'h ' + remainingMinutes+'m';
   }
+  const getReviewColor = (rating) => {
+    if(rating) {
+        if(rating > 7) {
+            setBg('bg-green-500')
+        } else if(rating > 5) {
+            setBg('bg-yellow-500')
+        } else {
+            setBg('bg-red-500')
+        }
+    }
+}
+useEffect(() => {
+  getReviewColor(movie &&movie.vote_average.toFixed(1))
+}, [movie])
   if (movie) {
     return (
       <div
         style={{
-          background: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`,
+          background: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-        className="flex flex-col md:flex-row justify-center items-center relative text-light pt-20 pb-20"
+        className="flex flex-col md:flex-row justify-center items-center relative text-white pt-20 pb-20"
       >
         {/* Nav and theme buttons */}
         <div className="absolute top-0 left-0 m-4 z-50">
           <button className="cursor-pointer"><img src={ARROW_LEFT_WHITE} alt="Back Button" onClick={() => window.history.back()}/></button>
         </div>
-        <div className="absolute top-0 right-0 m-4 z-50">
-        <button className="bg-dark text-light dark:bg-light dark:text-dark p-2 rounded-md" onClick={() => switchTheme(theme)}>
+        {/* <div className="absolute top-0 right-0 m-4 z-50">
+        <button className="bg-dark text-white dark:bg-light dark:text-black p-2 rounded-md" onClick={() => switchTheme(theme)}>
           <img src={theme === 'light'? MOON : SUN} alt="Theme icon" />
         </button>
-        </div>
+        </div> */}
         {/* Actual Card */}
         <div
           id="overlay"
@@ -47,7 +60,7 @@ const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
         <div className="m-4 z-50">
           <img
             className="rounded-xl"
-            src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             alt="Movie Backdrop"
           />
         </div>
@@ -57,13 +70,29 @@ const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
             {movie.title !== movie.original_title &&
               `(${movie.original_title})`}
           </h2>
-          <div className="flex items-center mt-2 mb-2">
-            <img className="w-8" src={STAR} alt="Star Rating" />
+          <h3 className="text-2xl md:text-lg m-2 text-slate-200">{movie.tagline}</h3>
+          <div className="flex">
+            {movie.genres &&
+              movie.genres.map((genre) => (
+                <p
+                  className="mr-2 mt-2 mb-2 bg-gray-200 text-black p-2 rounded-md"
+                  key={genre.id}
+                >
+                  {genre.name}
+                </p>
+              ))}
+          </div>
+          <div className={"flex items-center mt-2 mb-2 rounded-md "+bg}>
+            <img className="w-5 h-5 m-1" src={STAR} alt="Star Rating" />
             <p className="m-2 text-2xl">
-              {movie.vote_average && movie.vote_average.toFixed(1)}/10
+              {movie.vote_average && movie.vote_average.toFixed(1)}
             </p>
           </div>
-          <div className="flex items-center bg-black p-4 w-fit rounded-lg">
+          <div className="mb-2">
+            <p className="font-bold">Overview:</p>
+            <p>{movie.overview}</p>
+          </div>
+          <div className="flex items-center bg-secondary p-4 w-fit rounded-lg">
             <p className="text-xl">Watch Movie Trailer</p>
             <button
               className="bg-gray-300 text-black p-2 rounded-md shadow-xl m-2 ml-4"
@@ -79,24 +108,17 @@ const MovieDetailsCard = ({ movie, onWatchTrailer }) => {
             <li className="text-white"></li>
             {movie.runtime && (
               <p className="text-2xl mr-2 mt-2 mb-2">
-                {(movie.runtime / 60).toFixed(0) - 1}h {movie.runtime % 60}m
+                {convertMinutesToSeconds(movie.runtime)}
               </p>
             )}
-          </div>
-          <div className="flex">
-            {movie.genres &&
-              movie.genres.map((genre) => (
-                <p
-                  className="mr-2 mt-2 mb-2 bg-gray-200 text-black p-2 rounded-md"
-                  key={genre.id}
-                >
-                  {genre.name}
-                </p>
-              ))}
+            <li className="text-white"></li>
+            <p className="text-2xl mr-2 mt-2 mb-2">
+              {movie.status}
+            </p>
           </div>
           <div className="flex items-center mt-2 mb-2">
             <img className="w-10" src={CALENDAR} alt="Released Date" />
-            <p className="m-2 text-xl ml-4">{movie.release_date}</p>
+            <p className="m-2 text-xl ml-4">{moment(movie.release_date).format("MMM DD, yyyy")}</p>
           </div>
         </div>
       </div>

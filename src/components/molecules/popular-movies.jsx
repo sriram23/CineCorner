@@ -90,7 +90,6 @@ let scrollDebounce;
   };
   return (
     <div className="popular-container">
-      <h2 className="text-3xl text-center mb-4 pt-4">Popular Movies</h2>
       <div className="flex flex-wrap justify-center">
         {movies &&
           movies.map((movie) => (

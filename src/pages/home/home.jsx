@@ -3,8 +3,7 @@ import SearchMovie from "../../components/molecules/search-movie";
 import Tabs from "../../components/tabs";
 import './home.css'
 import LOGO from '../../../assets/logo.png'
-import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from '../../slice/mainSlice'
+import { useSelector } from "react-redux";
 import SUN from '../../../assets/sun.png'
 import MOON from '../../../assets/moon.png'
 import NowPlaying from "../../components/molecules/now-playing";
@@ -13,26 +12,16 @@ import Upcoming from "../../components/molecules/upcoming";
 
 const Home = () => {
   const theme = useSelector((state) => state.main.theme)
-  const currentTab = useSelector((state) => state.main.currentTab)
-  const dispatch = useDispatch()
-  const switchTheme = () => {
-    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))
-    if (theme === 'light') {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }
   return (
-    <div className="bg-light dark:bg-dark dark:text-light text-dark">
-      <div className="flex flex-col md:flex-row p-2 justify-between items-center">
+    <div className="bg-primary text-white">
+      <div className="flex flex-col md:flex-row p-2 justify-between items-center sticky top-0 bg-secondary z-30">
         <div className="flex items-center">
           <img src={LOGO} alt="Cine Corner Logo" className="w-16 m-2" />
           <h1 className="text-4xl mb-4 pt-4 font-bold">Cine Corner</h1>
         </div>
-        <button className="bg-dark text-light dark:bg-light dark:text-dark p-2 rounded-md" onClick={() => switchTheme(theme)}>
+        {/* <button className="bg-dark text-white dark:bg-light dark:text-black p-2 rounded-md" onClick={() => switchTheme(theme)}>
           <img src={theme === 'light'? MOON : SUN} alt="Theme icon" />
-        </button>
+        </button> */}
       </div>
       <Tabs
         tabs={["Popular", "Now Playing", "Top Rated", "Upcoming", "Search"]}

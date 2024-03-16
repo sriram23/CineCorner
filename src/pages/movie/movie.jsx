@@ -70,17 +70,17 @@ const Movie = () => {
     scrollElement.scrollLeft += direction === "left" ? -750 : 750;
   };
   return (
-    <div className="flex flex-col items-center bg-light text-dark dark:bg-dark dark:text-light">
+    <div className="flex flex-col items-center bg-primary text-white">
       <div className="w-full">
         <MovieDetailsCard
           movie={currentMovie}
           onWatchTrailer={() => setShowTrailer(true)}
         />
       </div>
-      <div className="max-w-5xl m-2 mt-20">
+      {/* <div className="max-w-5xl m-2 mt-20">
         <h3 className="text-3xl mb-2">About the movie</h3>
         <p className="text-lg">{currentMovie?.overview}</p>
-      </div>
+      </div> */}
       <div className="max-w-5xl m-2 mt-20">
         <h3 className="text-3xl mb-2 text-center lg:text-left">Cast</h3>
         <div className="flex items-center">
@@ -139,12 +139,12 @@ const Movie = () => {
           )}
         </div>
       </div>
-      <div className="max-w-5xl m-2 mt-20">
+      {reviews && <div className="max-w-5xl m-2 mt-20">
         <h3 className="text-3xl mb-2">Reviews</h3>
-        {reviews && reviews.map(review => (
+        {reviews.map(review => (
           <ReviewCard review={review}/>
         ))}
-      </div>
+      </div>}
       {showTrailer && trailer.results && trailer.results.length && (
         <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex w-full h-full items-center justify-center bg-black bg-opacity-70">
           <TrailerModal data={trailer} onClose={() => setShowTrailer(false)} />

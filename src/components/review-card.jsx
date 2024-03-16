@@ -18,14 +18,14 @@ const ReviewCard = ({review}) => {
         }
     }
     return (
-        <div className='p-4 pl-0'>
+        <div className='p-4 bg-secondary mb-2'>
             <div className='flex items-center mb-1'>
                 <h2 className='font-bold mr-2'>{review && review.author}</h2>
                 <h3 className='text-gray-400 mr-2'>@{review && review.author_details && review.author_details.username}</h3>
-                <div className={'text-white pr-1 pt-0 rounded-md flex items-center w-max'+' '+bg}>
+                {review && review.author_details && review.author_details.rating &&<div className={'text-white pr-1 pt-0 rounded-md flex items-center w-max'+' '+bg}>
                     <img className='w-3 m-1' src={WHITE_STAR} alt="Star rating" />
                     <p className='text-sm'>{review && review.author_details && review.author_details.rating}</p>
-                </div>
+                </div>}
             </div>
             <p>{review && showMore ? review.content : review.content.length > 500 ? review.content.slice(0,500)+"...":review.content}</p>
             {review.content && review.content.length > 500 && <button className='text-blue-500' onClick={() => setShowMore(!showMore)}>{showMore ? 'Show Less' : 'Show More'}</button>}

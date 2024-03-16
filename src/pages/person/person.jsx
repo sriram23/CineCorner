@@ -1,14 +1,25 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import { setPersonDetails, setPersonCredits, setPersonImages } from "../../slice/movieSlice";
 
 import axios from "axios";
 import PersonCredit from "../../components/person-credit-card";
+
+import ARROW_LEFT_WHITE from "../../../assets/ArrowLeftWhite.png"
+import SUN from "../../../assets/sun.png"
+import MOON from "../../../assets/moon.png"
 const Person = () => {
+    const dispatch = useDispatch()
+    const theme = useSelector((state) => state.main.theme)
     const person = useSelector((state) => state.movie.personDetails)
     const images = useSelector((state) => state.movie.personDetails.images)
-    const dispatch = useDispatch()
+    const [banner, setBanner] = useState()
+ 
+  
+    useEffect(() => {
+      setBanner(images?.profiles[images.profiles.length-1]?.file_path)
+    }, [images])
     const {id} = useParams()
     const PERSON_URL=`https://api.themoviedb.org/3/person/${id}?language=en-US`
     const CREDITS_URL=`https://api.themoviedb.org/3/person/${id}/combined_credits?language=en-US`
@@ -51,11 +62,10 @@ const Person = () => {
           });
           dispatch(setPersonImages(res.data))
     }
-    const image = images && images.profiles && images.profiles[0]
     return (
-        <div className="bg-light text-dark dark:bg-dark dark:text-light">
-            <div className="flex relative justify-center" style={ images && images.file_path &&{
-                background: `url(https://image.tmdb.org/t/p/w500/${image.file_path})`,
+        <div className="bg-primary">
+            <div className="flex relative justify-center" style={ banner &&{
+                background: `url(https://image.tmdb.org/t/p/w500/${banner})`,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
             }}>
@@ -64,6 +74,17 @@ const Person = () => {
                 id="overlay"
                 className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900 opacity-60 duration-700"
                 ></div>
+
+                {/* Nav and theme buttons */}
+                <div className="absolute top-0 left-0 m-4 z-50">
+                  <button className="cursor-pointer"><img src={ARROW_LEFT_WHITE} alt="Back Button" onClick={() => window.history.back()}/></button>
+                </div>
+                <div className="absolute top-0 right-0 m-4 z-50">
+                <button className="bg-dark text-white dark:bg-light dark:text-black p-2 rounded-md" onClick={() => switchTheme(theme)}>
+                  <img src={theme === 'light'? MOON : SUN} alt="Theme icon" />
+                </button>
+                </div>
+
                 <div className="z-50">
                 {person && person.profile_path && <img className="rounded-xl w-48 m-10" src={`https://image.tmdb.org/t/p/w500/${person.profile_path}`} alt="Person Image" />}
                 </div>
@@ -80,7 +101,7 @@ const Person = () => {
                     {person?.homepage && <a className="text-xl underline mb-2" href={person?.homepage}>Home Page</a>}
                 </div>
             </div>
-            <div className="w-full lg:w-2/3 m-auto text-dark dark:text-light">
+            <div className="w-full lg:w-2/3 m-auto text-black dark:text-white">
                 <h2 className="text-2xl font-bold mt-2 mb-2">Acting</h2>
                 {person.credits && person.credits.cast && person.credits.cast.map((credit) => <PersonCredit key={credit.id} credit={credit} type={'cast'}/>)}
                 <h2 className="text-2xl font-bold mt-2 mb-2">Other Roles</h2>

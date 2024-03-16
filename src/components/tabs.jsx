@@ -6,8 +6,8 @@ const Tabs = ({tabs, contents}) => {
         sessionStorage.setItem('currentTab', active)
     }, [active])
     return (
-        <div>
-            <div className="flex m-2 whitespace-nowrap overflow-x-auto">
+        <div className="relative">
+            <div className="flex m-2 ml-0 mt-0 whitespace-nowrap overflow-x-auto sticky top-20 bg-secondary">
                 {tabs.map((tab, index) => (
                     <button className={"m-1 p-2 "+(active === index && " border-b-2 border-blue-500")} key={index} onClick={() => setActive(index)}>{tab}</button>
                 ))}

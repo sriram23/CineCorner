@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ReactDOM from "react-dom/client";
 import Home from "./pages/home/home";
 import { store } from "./store";
@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Movie from "./pages/movie/movie";
 import Footer from "./components/footer";
 import Person from "./pages/person/person";
+import { useSelector} from "react-redux";
+import { useEffect } from "react";
 
 const App = () => {
   return (
