@@ -6,8 +6,9 @@ import moment from "moment";
 const MovieCard = ({ data, onCardClick, loading }) => {
   const [bg, setBg] = useState('bg-green-500')
   useEffect(() =>{
-    getReviewColor(data.vote_average.toFixed(1))
-  },[data.vote_average])
+    console.log("data", data)
+    getReviewColor(data && data.vote_average.toFixed(1))
+  },[data])
   const getReviewColor = (rating) => {
     if(rating) {
         if(rating > 7) {

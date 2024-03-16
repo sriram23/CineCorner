@@ -13,6 +13,7 @@ const initialState = {
     totalPages: 1,
     currentReviews: [],
     personDetails: {},
+    similarMovies: [],
 }
 
 export const movieSlice = createSlice({
@@ -55,9 +56,12 @@ export const movieSlice = createSlice({
     },
     setPersonImages: (state, action) => {
         state.personDetails.images = action.payload
+    },
+    setSimilarMovies: (state, action) => {
+        state.similarMovies = action.payload
     }
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage, setPersonCredits, setPersonImages } = movieSlice.actions
+export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage, setPersonCredits, setPersonImages, setSimilarMovies } = movieSlice.actions
 export default movieSlice.reducer

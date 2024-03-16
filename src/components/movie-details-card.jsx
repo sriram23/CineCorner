@@ -71,7 +71,7 @@ useEffect(() => {
               `(${movie.title})`}
           </h1>
           <h3 className="text-2xl md:text-lg m-2 text-slate-200">{movie.tagline}</h3>
-          <div className="flex">
+          <div className="flex flex-wrap">
             {movie.genres &&
               movie.genres.map((genre) => (
                 <p
@@ -120,6 +120,18 @@ useEffect(() => {
             <img className="w-10" src={CALENDAR} alt="Released Date" />
             <p className="m-2 text-xl ml-4">{moment(movie.release_date).format("MMM DD, yyyy")}</p>
           </div>
+          <div>
+        <h3 className="font-bold mt-2 mb-2 text-center lg:text-left">Producers</h3>
+        <div className="flex items-center">
+          {movie && movie.production_companies.map(company => (
+            <div className="m-4 ml-0">
+            {!company.logo_path && <p className="">{company.name}</p>}
+            {company.logo_path && <img title={company.name} className="bg-white p-2 h-10" src={'https://image.tmdb.org/t/p/w500'+company.logo_path} alt={'Image of '+company.name} />}
+            </div>
+          ))}
+        </div>
+        {movie.homepage && <button className="mt-2 text-xl underline" onClick={() => window.open(movie.homepage, '_blank')}>Home Page</button>}
+      </div>
         </div>
       </div>
     );
