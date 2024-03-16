@@ -9,9 +9,9 @@ const PersonCredit =  ({credit, type}) => {
                 <li className="m-1 p-2"></li>
             </div>
             <h3 className="mt-1 mb-1 p-1 text-xl font-bold">{credit.original_title}</h3>
-            {type === 'cast' && credit.character &&<h4 className="mt-1 mb-1 p-1 text-lg text-slate-500">as {credit.character}</h4>}
+            {type === 'cast' && credit.character &&<h4 className="mt-1 mb-1 p-1 text-lg text-slate-200">as {credit.character}</h4>}
             {type === 'crew' && credit.job && <h4 className="mt-1 mb-1 p-2">{credit.job}</h4>}
-            <p className="mt-1 mb-1 p-2 text-slate-500">({LANGUAGES[credit.original_language]})</p>
+            <p className="mt-1 mb-1 p-2 text-slate-200">({LANGUAGES[credit.original_language]})</p>
         </div>
     )
 }

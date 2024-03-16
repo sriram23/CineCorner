@@ -66,9 +66,9 @@ useEffect(() => {
         </div>
         <div className="w-full md:w-1/3 m-4 z-50 flex flex-col items-center md:items-start">
           <h2 className="text-2xl md:text-4xl m-2 font-bold">
-            {movie.title}{" "}
+            {movie.original_title}{" "}
             {movie.title !== movie.original_title &&
-              `(${movie.original_title})`}
+              `(${movie.title})`}
           </h2>
           <h3 className="text-2xl md:text-lg m-2 text-slate-200">{movie.tagline}</h3>
           <div className="flex">
