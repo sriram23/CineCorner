@@ -30,15 +30,17 @@ const MovieCard = ({ data, onCardClick, loading }) => {
     </div>
   )
   return (
-    <div onClick={() => onCardClick(data.id)} className="w-full md:w-1/3 xl:w-1/4 m-4 bg-secondary border border-secondary hover:border-white rounded-lg  cursor-pointer shadow-md flex justify-between flex-col">
-          {data.poster_path ? <img
-            className="w-full rounded-lg"
+    <div onClick={() => onCardClick(data.id)} className="w-full md:w-1/3 xl:w-1/4 m-4 bg-secondary border border-secondary rounded-lg  cursor-pointer shadow-md flex justify-between flex-col">
+          {data.poster_path ? 
+          <figure className="w-full overflow-hidden z-20">
+          <img
+            className="w-full rounded-lg hover:scale-110 transition-transform overflow-hidden"
             src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
             alt={"Movie poster "+data.title}
-          />: <img
+          /></figure>: <figure><img
           className="w-full rounded-md"
           src={PLACEHOLDER}
-        />}
+        /></figure>}
           {/* <p>{data.overview.length > 150 ? data.overview.slice(0, 150) + "..." : data.overview}</p> */}
       <div className="p-2">
       <h2 className="text-2xl font-bold mt-2">
