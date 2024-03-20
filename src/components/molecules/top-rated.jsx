@@ -5,9 +5,10 @@ import PageComponent from "../../components/page-component";
 
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/topRatedSlice";
+import { setTopRatedMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/topRatedSlice";
 // Router
 import { useNavigate } from "react-router-dom";
+import Header from "../header";
 
 const TopRated = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const TopRated = () => {
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies([...movies, ...res.data.results]));
+      dispatch(setTopRatedMovies([...movies, ...res.data.results]));
     }
   }
 
@@ -65,7 +66,7 @@ const TopRated = () => {
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies(res.data.results));
+      dispatch(setTopRatedMovies(res.data.results));
       dispatch(setTotalPages(res.data.total_pages))
     }
     setTimeout(() => {
@@ -89,7 +90,8 @@ const TopRated = () => {
     navigate(`/movie/${id}`);
   };
   return (
-    <div className="popular-container">
+    <div className="popular-container bg-primary text-white">
+      <Header/>
       <div className="flex flex-wrap justify-center">
         {movies &&
           movies.map((movie) => (

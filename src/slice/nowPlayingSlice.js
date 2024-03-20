@@ -19,7 +19,7 @@ export const nowPlayingSlice = createSlice({
   name: "nowPlaying",
   initialState,
   reducers: {
-    setMovies: (state, action) => {
+    setNowPlayingMovies: (state, action) => {
         state.movies = action.payload
     },
     setGenres: (state, action) => {
@@ -53,5 +53,5 @@ export const nowPlayingSlice = createSlice({
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = nowPlayingSlice.actions
+export const { setNowPlayingMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = nowPlayingSlice.actions
 export default nowPlayingSlice.reducer

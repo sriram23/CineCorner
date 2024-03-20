@@ -19,7 +19,7 @@ export const upcomingSlice = createSlice({
   name: "upcoming",
   initialState,
   reducers: {
-    setMovies: (state, action) => {
+    setUpComingMovies: (state, action) => {
         state.movies = action.payload
     },
     setGenres: (state, action) => {
@@ -53,5 +53,5 @@ export const upcomingSlice = createSlice({
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = upcomingSlice.actions
+export const { setUpComingMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = upcomingSlice.actions
 export default upcomingSlice.reducer

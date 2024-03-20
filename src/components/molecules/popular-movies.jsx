@@ -5,9 +5,10 @@ import PageComponent from "../../components/page-component";
 
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/movieSlice";
+import { setPopularMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/movieSlice";
 // Router
 import { useNavigate } from "react-router-dom";
+import Header from "../header";
 
 const PopularMovies = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ let scrollDebounce;
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies(res.data.results));
+      dispatch(setPopularMovies(res.data.results));
       dispatch(setTotalPages(res.data.total_pages))
     }
     setTimeout(() => {
@@ -70,7 +71,7 @@ let scrollDebounce;
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies([...movies, ...res.data.results]));
+      dispatch(setPopularMovies([...movies, ...res.data.results]));
     }
   }
   const fetchGenre = async () => {
@@ -89,7 +90,8 @@ let scrollDebounce;
     navigate(`/movie/${id}`);
   };
   return (
-    <div className="popular-container">
+    <div className="popular-container bg-primary text-white">
+      <Header/>
       <div className="flex flex-wrap justify-center">
         {movies &&
           movies.map((movie) => (

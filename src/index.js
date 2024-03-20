@@ -9,15 +9,23 @@ import Footer from "./components/footer";
 import Person from "./pages/person/person";
 import { useSelector} from "react-redux";
 import { useEffect } from "react";
+import NowPlaying from "./components/molecules/now-playing";
+import PopularMovies from "./components/molecules/popular-movies";
+import TopRated from "./components/molecules/top-rated";
+import Upcoming from "./components/molecules/upcoming";
 
 const App = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/movie/:id" element={<Movie />}></Route>
           <Route path="/person/:id" element={<Person/>}></Route>
+          <Route path="/now_playing" element={<NowPlaying/>}></Route>
+          <Route path="/popular" element={<PopularMovies/>}></Route>
+          <Route path="/top_rated" element={<TopRated/>}></Route>
+          <Route path="/upcoming" element={<Upcoming/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

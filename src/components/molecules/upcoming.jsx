@@ -5,9 +5,10 @@ import PageComponent from "../../components/page-component";
 
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/upcomingSlice";
+import { setUpComingMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/upcomingSlice";
 // Router
 import { useNavigate } from "react-router-dom";
+import Header from "../header";
 
 const Upcoming = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Upcoming = () => {
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies([...movies, ...res.data.results]));
+      dispatch(setUpComingMovies([...movies, ...res.data.results]));
     }
   }
 
@@ -66,7 +67,7 @@ const Upcoming = () => {
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies(res.data.results));
+      dispatch(setUpComingMovies(res.data.results));
       dispatch(setTotalPages(res.data.total_pages))
     }
     setTimeout(() => {
@@ -90,7 +91,8 @@ const Upcoming = () => {
     navigate(`/movie/${id}`);
   };
   return (
-    <div className="popular-container">
+    <div className="popular-container bg-primary text-white">
+      <Header/>
       <h2 className="text-3xl text-center mb-4 pt-4">Upcoming Movies</h2>
       <div className="flex flex-wrap justify-center">
         {movies &&

@@ -19,7 +19,7 @@ export const topRatedSlice = createSlice({
   name: "topRated",
   initialState,
   reducers: {
-    setMovies: (state, action) => {
+    setTopRatedMovies: (state, action) => {
         state.movies = action.payload
     },
     setGenres: (state, action) => {
@@ -53,5 +53,5 @@ export const topRatedSlice = createSlice({
   }  
 })
 
-export const { setMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = topRatedSlice.actions
+export const { setTopRatedMovies, setGenres, setCurrentId, setCredits, setTrailer, setCurrentPage, setTotalPages, setCurrentReviews, setPersonDetails, incrementCurrentPage } = topRatedSlice.actions
 export default topRatedSlice.reducer

@@ -4,9 +4,10 @@ import MovieCard from "../../components/movie-card";
 
 // Redux toolkit
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/nowPlayingSlice";
+import { setNowPlayingMovies, setGenres, setCurrentPage, setTotalPages, incrementCurrentPage } from "../../slice/nowPlayingSlice";
 // Router
 import { useNavigate } from "react-router-dom";
+import Header from "../header";
 
 const NowPlaying = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const NowPlaying = () => {
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies([...movies, ...res.data.results]));
+      dispatch(setNowPlayingMovies([...movies, ...res.data.results]));
     }
   }
   const fetchMovie = async () => {
@@ -64,7 +65,7 @@ const NowPlaying = () => {
       },
     });
     if (res.data && res.data.results) {
-      dispatch(setMovies(res.data.results));
+      dispatch(setNowPlayingMovies(res.data.results));
       dispatch(setTotalPages(res.data.total_pages))
     }
     setTimeout(() => {
@@ -88,7 +89,8 @@ const NowPlaying = () => {
     navigate(`/movie/${id}`);
   };
   return (
-    <div className="popular-container">
+    <div className="popular-container bg-primary text-white">
+      <Header/>
       <div className="flex flex-wrap justify-center">
         {movies &&
           movies.map((movie) => (
