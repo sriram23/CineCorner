@@ -13,10 +13,11 @@ import NowPlaying from "./components/molecules/now-playing";
 import PopularMovies from "./components/molecules/popular-movies";
 import TopRated from "./components/molecules/top-rated";
 import Upcoming from "./components/molecules/upcoming";
+import SearchMovie from "./components/molecules/search-movie";
 
 const App = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-primary">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/popular" element={<PopularMovies/>}></Route>
           <Route path="/top_rated" element={<TopRated/>}></Route>
           <Route path="/upcoming" element={<Upcoming/>}></Route>
+          <Route path="/search" element={<SearchMovie/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

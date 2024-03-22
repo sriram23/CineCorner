@@ -90,7 +90,7 @@ const TopRated = () => {
     navigate(`/movie/${id}`);
   };
   return (
-    <div className="popular-container bg-primary text-white">
+    <div className="popular-container text-white">
       <Header/>
       <div className="flex flex-wrap justify-center">
         {movies &&

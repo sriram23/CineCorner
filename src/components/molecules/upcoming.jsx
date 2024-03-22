@@ -91,7 +91,7 @@ const Upcoming = () => {
     navigate(`/movie/${id}`);
   };
   return (
-    <div className="popular-container bg-primary text-white">
+    <div className="popular-container text-white">
       <Header/>
       <h2 className="text-3xl text-center mb-4 pt-4">Upcoming Movies</h2>
       <div className="flex flex-wrap justify-center">

@@ -4,18 +4,29 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies, setTotalPages, setQuery } from "../../slice/searchSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchMovie = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const location = useLocation()
+    useEffect(() => {
+      if(location.state) {
+        dispatch(setQuery(location.state))
+      }
+    }, [])
     const query = useSelector((state) => state.search.query)
     const movies = useSelector((state) => state.search.movies)
     const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${process.env.API_KEY}`;
     const [isLoading, setIsloading] = useState(false);
+    const [currentQuery, setCurrentQuery] = useState(query?query:location.state)
     useEffect(() => {
         searchForMovie()
     }, [query])
+    // TODO: need to revisit if it's really required
+    useEffect(() => {
+      dispatch(setQuery(currentQuery))
+    }, [currentQuery])
   const searchForMovie = async () => {
     setIsloading(true);
       const res = await axios.get(SEARCH_URL);
@@ -26,6 +37,7 @@ const SearchMovie = () => {
     setIsloading(false);
   };
   const handleSearch = (e) => {
+    setCurrentQuery(e.target.value);
     dispatch(setQuery(e.target.value));
   };
   const handleCardClick = (id) => {
@@ -33,11 +45,11 @@ const SearchMovie = () => {
   };
 
   return (
-    <div className="search-container">
+    <div className="search-container text-white flex flex-col">
       <div className="flex justify-center sm:justify-start">
         <input
         // TODO: Fix the value
-        //   value={query}
+          defaultValue={currentQuery}
           onChange={_.debounce(handleSearch, 1000)}
           className="text=xl h-10 p-2 text-black rounded-md m-2 w-4/5 sm:w-1/2 md:w-1/5"
           type="search"
