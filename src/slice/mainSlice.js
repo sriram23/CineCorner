@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     theme: 'light',
-    currentTab: 0
+    currentTab: 0,
+    currentLanguage: 'xx'
 }
 
 export const mainSlice = createSlice({
@@ -14,9 +15,12 @@ export const mainSlice = createSlice({
     },
     setCurrentTab: (state, actions) => {
         state.currentTab = actions.payload
+    },
+    setCurrentLanguage: (state, actions) => {
+        state.currentLanguage = actions.payload
     }
   }  
 })
 
-export const { setTheme, setCurrentTab } = mainSlice.actions
+export const { setTheme, setCurrentTab, setCurrentLanguage } = mainSlice.actions
 export default mainSlice.reducer

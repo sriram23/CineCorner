@@ -26,15 +26,16 @@ const Home = () => {
   const popular = useSelector((state) => state.movie.movies);
   const topRated = useSelector((state) => state.topRated.movies);
   const upcoming = useSelector((state) => state.upcoming.movies);
+  const language = useSelector((state) => state.main.currentLanguage);
   const dispatch = useDispatch();
   const NOW_PLAYING_URL =
-    `https://api.themoviedb.org/3/movie/now_playing?langualge=en-US&page=1`;
+    `https://api.themoviedb.org/3/movie/now_playing?langualge=${language}&page=1`;
   const POPULAR_URL =
-    `https://api.themoviedb.org/3/movie/popular?langualge=en-US&page=1`;
+    `https://api.themoviedb.org/3/movie/popular?langualge=${language}&page=1`;
   const TOP_RATED_URL =
-    `https://api.themoviedb.org/3/movie/top_rated?langualge=en-US&page=1`;
+    `https://api.themoviedb.org/3/movie/top_rated?langualge=${language}&page=1`;
   const UPCOMING_URL =
-    `https://api.themoviedb.org/3/movie/upcoming?langualge=en-US&page=1`;
+    `https://api.themoviedb.org/3/movie/upcoming?langualge=${language}&page=1`;
 
   const fetchMovies = async (url, selector) => {
     const res = await axios.get(url, {
@@ -52,6 +53,7 @@ const Home = () => {
     }
   }
 
+
   useEffect(() => {
     setIsloading(true);
     fetchMovies(NOW_PLAYING_URL, setNowPlayingMovies);
@@ -59,7 +61,7 @@ const Home = () => {
     fetchMovies(TOP_RATED_URL, setTopRatedMovies);
     fetchMovies(UPCOMING_URL, setUpComingMovies);
     setIsloading(false)
-  }, []);
+  }, [language])
 
   const HOME_DATA = [
     {
@@ -101,7 +103,7 @@ const Home = () => {
           {HOME_DATA.map((data) => (
             <div>
               <div className="flex justify-between">
-                <h2 className="text-2xl p-4">{data.title}</h2>
+                <h2 className="text-2xl p-4">{data.title} | {language}</h2>
                 <button className="m-2 p-2 bg-secondary rounded-lg border border-white" onClick={() => navigate(data.path)}>View All</button>
               </div>
               <div className="flex flex-wrap lg:flex-nowrap lg:whitespace-nowrap lg:overflow-auto lg:scroll-smooth scrollbar-hide">
