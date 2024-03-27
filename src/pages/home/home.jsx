@@ -103,7 +103,7 @@ const Home = () => {
           {HOME_DATA.map((data) => (
             <div>
               <div className="flex justify-between">
-                <h2 className="text-2xl p-4">{data.title} | {language}</h2>
+                <h2 className="text-2xl p-4">{data.title}</h2>
                 <button className="m-2 p-2 bg-secondary rounded-lg border border-white" onClick={() => navigate(data.path)}>View All</button>
               </div>
               <div className="flex flex-wrap lg:flex-nowrap lg:whitespace-nowrap lg:overflow-auto lg:scroll-smooth scrollbar-hide">

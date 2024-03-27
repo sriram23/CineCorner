@@ -47,7 +47,9 @@ const Header = () => {
         <h1 className="text-4xl mb-4 pt-4 font-bold">Cine Corner</h1>
       </div>
       <div className="text-black flex">
-        <div className="m-2">
+
+        {/* COMMENTING THE BELOW AS THE FUNCTIONALITY SEEMS MUCH IRRELEVANT TO THE USER */}
+        {/* <div className="m-2">
           <select className="bg-white border h-10 rounded-md">
             {countries && countries.length > 0 && countries.map(c => (
               <option key={c.iso_3166_1} value={c.iso_3166_1}>{c.native_name || c.english_name}</option>
@@ -64,7 +66,7 @@ const Header = () => {
               <option key={lg.iso_639_1} value={lg.iso_639_1}>{lg.name || lg.english_name}</option>
             ))}
           </select>
-        </div>
+        </div> */}
         <div className="relative">
           <input
             onChange={(e) => setQuery(e.target.value)}
