@@ -21,7 +21,7 @@ const MovieCard = ({ data, onCardClick, loading }) => {
     }
 }
   if(loading) return (
-    <div className="animate-pulse w-full md:w-1/3 xl:w-1/4 m-4 rounded-lg bg-light border-primary border-2 p-4 cursor-pointer shadow-md flex justify-between flex-col">
+    <div className="animate-pulse w-full md:w-1/3 xl:w-1/4 m-0 md:m-4 rounded-lg bg-light border-primary border-2 p-4 cursor-pointer shadow-md flex justify-between flex-col">
       <div className="h-2 m-2 bg-primary rounded"></div>
       <div className="h-96 m-2 bg-primary rounded"></div>
       <div className="h-2 m-2 bg-primary rounded"></div>

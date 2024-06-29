@@ -18,10 +18,13 @@ import TopRated from "../../components/molecules/top-rated";
 import Upcoming from "../../components/molecules/upcoming";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
+import CustomAlert from "../../components/molecules/customAlert";
 
 const Home = () => {
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("");
   const nowPlaying = useSelector((state) => state.nowPlaying.movies);
   const popular = useSelector((state) => state.movie.movies);
   const topRated = useSelector((state) => state.topRated.movies);
@@ -36,8 +39,11 @@ const Home = () => {
     `https://api.themoviedb.org/3/movie/top_rated?langualge=${language}&page=1`;
   const UPCOMING_URL =
     `https://api.themoviedb.org/3/movie/upcoming?langualge=${language}&page=1`;
+  const DEFAULT_MESSAGE = "If you are residing in India and using the Jio network, this app might not work. Please try accessing the application using a different network or a VPN."
+  const ERROR_MESSAGE = "Something went wrong while fetching the movies. Please note that this application may not work if you are using the Jio network. Try accessing the application using a different network."
 
   const fetchMovies = async (url, selector) => {
+    try{
     const res = await axios.get(url, {
       headers: {
         accept: "application/json",
@@ -50,9 +56,16 @@ const Home = () => {
         dispatch(selector(res.data.results));
       }
       // dispatch({type: selector, payload: res.data.results})
+    }} catch(e) {
+      setCurrentMessage(ERROR_MESSAGE)
+      setShowAlert(true)
     }
   }
 
+  useEffect(() => {
+    setCurrentMessage(DEFAULT_MESSAGE)
+    setTimeout(() => setShowAlert(true), 5000);
+  }, [])
 
   useEffect(() => {
     setIsloading(true);
@@ -116,7 +129,7 @@ const Home = () => {
               />    
               ))}
               {/* Added shimmer cards, to prevent cumulative layout shift */}
-              {!data.data.length && <div className="flex w-full">
+              {!data.data.length && <div className="flex flex-col md:flex-row w-full">
                 <MovieCard loading={true} />
                 <MovieCard loading={true} />
                 <MovieCard loading={true} />
@@ -127,6 +140,9 @@ const Home = () => {
             </div>
           ))}
       </div>
+      {
+        showAlert && <CustomAlert message={currentMessage} onClose={() => setShowAlert(false)}/>
+      }
     </div>
   );
 };
