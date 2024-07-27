@@ -1,3 +1,11 @@
+[![Visits Badge](https://badges.pufler.dev/visits/sriram23/CineCorner)](https://badges.pufler.dev)
+[![Updated Badge](https://badges.pufler.dev/updated/sriram23/CineCorner)](https://badges.pufler.dev)
+[![Created Badge](https://badges.pufler.dev/created/sriram23/CineCorner)](https://badges.pufler.dev)
+![GitHub contributors](https://img.shields.io/github/contributors/sriram23/CineCorner?labelColor=black&color=%233fb911)
+![GitHub License](https://img.shields.io/github/license/sriram23/CineCorner?labelColor=black&color=%233fb911)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fcine-corner.web.app&labelColor=black&color=%233fb911)
+![GitHub top language](https://img.shields.io/github/languages/top/sriram23/CineCorner?color=%233fb911)
+
 # Cine Corner
 
 Welcome to **Cine Corner**, a movie application that leverages the [TMDB API](https://developer.themoviedb.org/docs/getting-started) to provide users with detailed information about a wide range of movies.
